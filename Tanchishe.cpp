@@ -330,80 +330,6 @@ void pause()//暂停
     }
 }
 
-/*
-void gamecircle()//控制游戏
-{
-
-    Pos(64, 15);
-    printf("不能穿墙，不能咬到自己\n");
-    Pos(64, 16);
-    printf("用↑.↓.←.→分别控制蛇的移动.");
-    Pos(64, 17);
-    printf("F1 为加速，F2 为减速\n");
-    Pos(64, 18);
-    printf("ESC ：退出游戏.space：暂停游戏.");
-    Pos(64, 20);
-    status = R;
-    while (1)
-    {
-        Pos(64, 10);
-        printf("得分：%d  ", score);
-        Pos(64, 11);
-        printf("每个食物得分：%d分", add);
-        if (GetAsyncKeyState(VK_UP) && status != D)
-        {
-            status = U;
-        }
-        else if (GetAsyncKeyState(VK_DOWN) && status != U)
-        {
-            status = D;
-        }
-        else if (GetAsyncKeyState(VK_LEFT) && status != R)
-        {
-            status = L;
-        }
-        else if (GetAsyncKeyState(VK_RIGHT) && status != L)
-        {
-            status = R;
-        }
-        else if (GetAsyncKeyState(VK_SPACE))
-        {
-            pause();
-        }
-        else if (GetAsyncKeyState(VK_ESCAPE))
-        {
-            endgamestatus = 3;
-            break;
-        }
-        else if (GetAsyncKeyState(VK_F1))
-        {
-            if (sleeptime >= 50)
-            {
-                sleeptime = sleeptime - 30;
-                add = add + 2;
-                if (sleeptime == 320)
-                {
-                    add = 2;//防止减到1之后再加回来有错
-                }
-            }
-        }
-        else if (GetAsyncKeyState(VK_F2))
-        {
-            if (sleeptime < 350)
-            {
-                sleeptime = sleeptime + 30;
-                add = add - 2;
-                if (sleeptime == 350)
-                {
-                    add = 1;  //保证最低分为1
-                }
-            }
-        }
-        Sleep(sleeptime);
-        snakemove();
-    }
-}
-*/
 
 void gamecircle()//控制游戏
 {
@@ -503,6 +429,7 @@ void gamecircle()//控制游戏
     }
 }
 
+/*
 void welcometogame()//开始界面
 {
     Pos(40, 12);
@@ -517,56 +444,34 @@ void welcometogame()//开始界面
     system("pause");
     system("cls");
 }
-
-/*void endgame()//结束游戏
-{
-
-    system("cls");
-    Pos(24, 12);
-    if (endgamestatus == 1)
-    {
-        printf("对不起，您撞到墙了。游戏结束!");
-    }
-    else if (endgamestatus == 2)
-    {
-        printf("对不起，您咬到自己了。游戏结束!");
-    }
-    else if (endgamestatus == 3)
-    {
-        printf("您已经结束了游戏。");
-    }
-    Pos(24, 13);
-    printf("您的得分是%d\n", score);
-    exit(0);
-}
 */
-
-/*
-void endgame()//结束游戏
+void welcometogame()//开场动画+欢迎界面
 {
+    int i;
+    // 开场小动画：打印一条从左到右的边框
+    Pos(10, 10);
+    printf("贪吃蛇游戏加载中...");
+    for (i = 10; i < 50; i++)
+    {
+        Pos(i, 12);
+        printf("■");
+        Sleep(50); // 控制动画速度
+    }
+
+    // 清屏，显示欢迎界面
     system("cls");
-    Pos(24, 12);
-    if (endgamestatus == 1)
-    {
-        printf("对不起，您撞到墙了。游戏结束!");
-    }
-    else if (endgamestatus == 2)
-    {
-        printf("对不起，您咬到自己了。游戏结束!");
-    }
-    else if (endgamestatus == 3)
-    {
-        printf("您已经结束了游戏。");
-    }
-    Pos(24, 13);
-    printf("您的得分是%d\n", score);
-    //添加暂停，避免闪退
-    Pos(24, 15);
-    printf("按任意键退出...");
-    system("pause > nul");
-    exit(0);
+    Pos(40, 12);
+    printf("欢迎来到贪食蛇游戏！");
+    Pos(40, 25);
+    system("pause");
+    system("cls");
+    Pos(25, 12);
+    printf("用↑.↓.←.→分别控制蛇的移动， F1 为加速，F2 为减速\n");
+    Pos(25, 13);
+    printf("加速将能得到更高的分数。\n");
+    system("pause");
+    system("cls");
 }
-*/
 
 void endgame()//结束游戏
 {
@@ -594,17 +499,6 @@ void endgame()//结束游戏
     system("pause > nul");
     exit(0);
 }
-
-/*
-void gamestart()//游戏初始化
-{
-    system("mode con cols=100 lines=30");
-    welcometogame();
-    creatMap();
-    initsnake();
-    createfood();
-}
-*/
 
 void gamestart()//游戏初始化
 {
@@ -733,16 +627,6 @@ void showGameLogs() {
     printf("按任意键返回游戏...");
     system("pause > nul");
 }
-
-/*
-int main()
-{
-    gamestart();
-    gamecircle();
-    endgame();
-    return 0;
-}
-*/
 
 int main()
 {
